@@ -337,8 +337,8 @@
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
@@ -496,11 +496,14 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            text-decoration: none;
+            color: inherit;
         }
 
         .cert-card:hover {
             transform: translateY(-3px);
             border-color: #667eea;
+            cursor: pointer;
         }
 
         .cert-date {
@@ -648,12 +651,20 @@
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">$3,143</div>
-                    <div class="stat-label">Monthly Cost Savings</div>
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Certifications</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">2x</div>
+                    <div class="stat-number">3x</div>
                     <div class="stat-label">VOIS Talented Star</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Cloud Platforms</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">DevOps Tools</div>
                 </div>
             </div>
         </div>
@@ -888,77 +899,16 @@
         document.getElementById('downloadCV').addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Create a simple PDF-like content
-            const cvContent = `
-Ahmed Mourad - DevOps Engineer
-===============================
-
-CONTACT
--------
-LinkedIn: https://www.linkedin.com/in/ahmedmoourad
-GitHub: https://github.com/Ahmed-Moourad
-Location: Egypt
-
-PROFILE
--------
-Accomplished Senior DevOps Engineer with over 3 years of experience in improving 
-software development through DevOps and Agile methods. Certified AWS Solution 
-Architect with expertise in multi-cloud environments (AWS, Azure, and Apigee).
-
-EXPERIENCE
-----------
-Senior DevOps Engineer | Vodafone Intelligent Solutions (_VOIS) | Aug 2024 - Present
-- Leading platform-wide features for hybrid connectivity
-- Implemented FinOps optimization generating USD 3,143 in monthly cost savings
-- Mentored junior DevOps engineers
-- Recognized as _VOIS Talented Star (2x)
-
-DevOps Engineer | Vodafone Intelligent Solutions (_VOIS) | Feb 2023 - Jul 2024
-- Built TaaS "Telco-as-a-Service" platform
-- Managed AWS-based multi-tenancy platform infrastructure
-- Recognized as _VOIS Talented Star
-
-DevOps Instructor | Digital Egypt Pioneers Initiative (DEPI) | Jun 2024 - Jan 2025
-- Preparing next generation of ICT specialists
-
-DevOps Instructor | Coursera | Oct 2023 - Dec 2023
-- Developed "Building a Scalable App using AWS EKS" course
-
-SKILLS
-------
-Cloud Platforms: AWS (Solution Architect), Azure, Apigee
-Containers: Docker, Kubernetes, Helm, EKS
-CI/CD: Azure Pipelines, Jenkins, CircleCI
-IaC: Terraform, Terragrunt, CloudFormation
-Monitoring: Prometheus, DataDog, HashiCorp Vault
-Security: Trivy, SonarQube, OWASP
-System Admin: Linux, Bash, Python, MySQL, Git
-
-CERTIFICATIONS
---------------
-- Microsoft Certified: Azure Fundamentals (AZ-900) - Jan 2026
-- HashiCorp Certified: Terraform Associate (003) - Dec 2025
-- AWS Solution Architect Associate (SAA-C03) - Dec 2023
-- Certified Incident Responder (PagerDuty) - Sep 2023
-- DevSecOps Foundation (Vodafone) - Sep 2023
-- Advanced Cloud DevOps Nanodegree (Udacity - Top Graduate) - Feb 2023
-- AWS Cloud Practitioner - Nov 2022
-
-EDUCATION
----------
-AWS re/start Program | Information Technology Institute (ITI) | Nov 2022
-Bachelor's Electrical Engineering | Alexandria University | Nov 2020
-`;
+            // Link to your PDF file in the GitHub repo
+            // Replace 'Ahmed_Mourad_CV.pdf' with your actual PDF filename
+            const pdfUrl = './Ahmed_Mourad_CV.pdf';
             
-            // Create a blob with the CV content
-            const blob = new Blob([cvContent], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Ahmed_Mourad_CV.txt';
+            a.href = pdfUrl;
+            a.download = 'Ahmed_Mourad_CV.pdf';
+            a.target = '_blank';
             document.body.appendChild(a);
             a.click();
-            window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         });
 
