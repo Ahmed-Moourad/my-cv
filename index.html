@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Mourad - DevOps Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #e4e4e7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-links a {
+            color: #a1a1aa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(180deg);
+        }
+
+        .download-cv {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-cv:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background: #f5f5f7;
+            color: #1a1a1a;
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .logo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-mode .nav-links a {
+            color: #52525b;
+        }
+
+        body.light-mode .nav-links a:hover {
+            color: #667eea;
+        }
+
+        body.light-mode .hero::before {
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+        }
+
+        body.light-mode .hero::after {
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.15) 0%, transparent 70%);
+        }
+
+        body.light-mode .hero p,
+        body.light-mode .about-text p,
+        body.light-mode .stat-label,
+        body.light-mode .experience-description,
+        body.light-mode .skill-card ul,
+        body.light-mode .cert-org,
+        body.light-mode .contact-content p,
+        body.light-mode footer {
+            color: #52525b;
+        }
+
+        body.light-mode .stat,
+        body.light-mode .skill-card,
+        body.light-mode .cert-card,
+        body.light-mode .experience-item {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .skill-card:hover,
+        body.light-mode .cert-card:hover {
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        body.light-mode .skill-card li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        body.light-mode .experience-company,
+        body.light-mode .cert-name {
+            color: #1a1a1a;
+        }
+
+        body.light-mode .experience-date {
+            color: #52525b;
+        }
+
+        body.light-mode .social-links a {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #52525b;
+        }
+
+        body.light-mode .social-links a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        body.light-mode footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            top: 20%;
+            left: 10%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.1) 0%, transparent 70%);
+            bottom: 20%;
+            right: 10%;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #a1a1aa;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid #0a0a0a;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: #e4e4e7;
+        }
+
+        .experience-date {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+        }
+
+        .experience-description {
+            color: #a1a1aa;
+            line-height: 1.8;
+        }
+
+        .experience-description ul {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .experience-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            color: #a1a1aa;
+        }
+
+        .skill-card li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
+        }
+
+        .skill-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+        }
+
+        .cert-date {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .cert-info {
+            flex: 1;
+        }
+
+        .cert-name {
+            color: #e4e4e7;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-org {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a1a1aa;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a1a1aa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-controls {
+                gap: 0.5rem;
+            }
+
+            .download-cv {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">AM.</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <a href="#" class="download-cv" id="downloadCV">Download CV</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="gradient-text">Ahmed Mourad</span></h1>
+            <p>Senior DevOps Engineer | AWS Certified Solution Architect | Multi-Cloud Expert specializing in AWS, Azure, and Apigee</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://www.linkedin.com/in/ahmedmoourad" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About <span class="gradient-text">Me</span></h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm an accomplished Senior DevOps Engineer with over 3 years of experience in improving software development through DevOps and Agile methodologies. Currently working at Vodafone Intelligent Solutions (_VOIS), I lead platform-wide features to help tenant projects with hybrid connectivity.</p>
+                <p>As a Certified AWS Solution Architect with expertise in multi-cloud environments (AWS, Azure, and Apigee), I've successfully identified and implemented FinOps optimizations generating significant cost savings across AWS workloads.</p>
+                <p>Beyond my full-time role, I share my knowledge as a DevOps Instructor with DEPI and have developed courses for Coursera, helping to prepare the next generation of DevOps professionals.</p>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$3,143</div>
+                    <div class="stat-label">Monthly Cost Savings</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2x</div>
+                    <div class="stat-label">VOIS Talented Star</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Work <span class="gradient-text">Experience</span></h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Senior DevOps Engineer</div>
+                        <div class="experience-company">Vodafone Intelligent Solutions (_VOIS)</div>
+                    </div>
+                    <div class="experience-date">Aug 2024 - Present</div>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Leading platform-wide features to help tenant projects onboarded on the Platform with hybrid connectivity</li>
+                        <li>Identified and implemented FinOps optimization across AWS workloads, generating USD 3,143 in monthly cost savings</li>
+                        <li>Supported onboarding of new hires and provided guidance and mentorship to junior DevOps engineers</li>
+                        <li>Recognized as _VOIS Talented Star for my contributions (two times)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">DevOps Engineer</div>
+                        <div class="experience-company">Vodafone Intelligent Solutions (_VOIS)</div>
+                    </div>
+                    <div class="experience-date">Feb 2023 - Jul 2024</div>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Building TaaS "Telco-as-a-Service" platform - the future of Vodafone with my team</li>
+                        <li>Recognized as _VOIS Talented Star for my contributions</li>
+                        <li>TaaS is a cloud-native platform aimed at enabling all Vodafone software development community to go live faster and have more time on development</li>
+                        <li>Managed AWS based multi-tenancy platform infrastructure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">DevOps Instructor</div>
+                        <div class="experience-company">Digital Egypt Pioneers Initiative (DEPI)</div>
+                    </div>
+                    <div class="experience-date">Jun 2024 - Jan 2025</div>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Taking part in preparing the next Egyptian generation of specialists in the field of modern technologies in the ICT sector</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">DevOps Instructor</div>
+                        <div class="experience-company">Coursera</div>
+                    </div>
+                    <div class="experience-date">Oct 2023 - Dec 2023</div>
+                </div>
+                <div class="experience-description">
+                    <ul>
+                        <li>Developed and introduced a guided project course "Building a Scalable App using AWS EKS: AWS Console Deployment"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical <span class="gradient-text">Skills</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Cloud Platforms</h3>
+                <ul>
+                    <li>AWS Solution Architect</li>
+                    <li>Azure Fundamentals</li>
+                    <li>Apigee</li>
+                    <li>Multi-Cloud Environments</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Container & Orchestration</h3>
+                <ul>
+                    <li>Docker</li>
+                    <li>Kubernetes</li>
+                    <li>Helm Charts</li>
+                    <li>AWS EKS</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>CI/CD & Automation</h3>
+                <ul>
+                    <li>Azure Pipelines</li>
+                    <li>Jenkins</li>
+                    <li>CircleCI</li>
+                    <li>Ansible</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Infrastructure as Code</h3>
+                <ul>
+                    <li>Terraform</li>
+                    <li>Terragrunt</li>
+                    <li>CloudFormation</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Monitoring & Security</h3>
+                <ul>
+                    <li>Prometheus</li>
+                    <li>DataDog</li>
+                    <li>HashiCorp Vault</li>
+                    <li>Trivy, SonarQube, OWASP</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>System Administration</h3>
+                <ul>
+                    <li>Linux (CentOS/RedHat)</li>
+                    <li>Bash Shell Scripting</li>
+                    <li>Python</li>
+                    <li>MySQL</li>
+                    <li>Git & GitHub</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <h2>Certifications & <span class="gradient-text">Achievements</span></h2>
+        <div class="certifications-grid">
+            <div class="cert-card">
+                <div class="cert-date">Jan 2026</div>
+                <div class="cert-info">
+                    <div class="cert-name">Microsoft Certified: Azure Fundamentals</div>
+                    <div class="cert-org">AZ-900</div>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-date">Dec 2025</div>
+                <div class="cert-info">
+                    <div class="cert-name">HashiCorp Certified: Terraform Associate</div>
+                    <div class="cert-org">003</div>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-date">Dec 2023</div>
+                <div class="cert-info">
+                    <div class="cert-name">AWS Solution Architect Associate</div>
+                    <div class="cert-org">SAA-C03</div>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-date">Sep 2023</div>
+                <div class="cert-info">
+                    <div class="cert-name">Certified Incident Responder</div>
+                    <div class="cert-org">PagerDuty</div>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-date">Sep 2023</div>
+                <div class="cert-info">
+                    <div class="cert-name">DevSecOps Foundation</div>
+                    <div class="cert-org">Vodafone</div>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-date">Feb 2023</div>
+                <div class="cert-info">
+                    <div class="cert-name">Advanced Cloud DevOps Nanodegree</div>
+                    <div class="cert-org">Udacity - Top Graduate</div>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-date">Nov 2022</div>
+                <div class="cert-info">
+                    <div class="cert-name">AWS Cloud Practitioner</div>
+                    <div class="cert-org">Amazon Web Services</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Let's <span class="gradient-text">Connect</span></h2>
+        <div class="contact-content">
+            <p>I'm always interested in discussing DevOps opportunities, cloud architecture challenges, or mentoring the next generation of engineers. Feel free to reach out!</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ahmedmoourad" target="_blank" title="LinkedIn">in</a>
+                <a href="https://github.com/Ahmed-Moourad" target="_blank" title="GitHub">GH</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ahmed Mourad. DevOps Engineer | AWS Certified Solution Architect</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.textContent = '☀️';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Download CV
+        document.getElementById('downloadCV').addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Create a simple PDF-like content
+            const cvContent = `
+Ahmed Mourad - DevOps Engineer
+===============================
+
+CONTACT
+-------
+LinkedIn: https://www.linkedin.com/in/ahmedmoourad
+GitHub: https://github.com/Ahmed-Moourad
+Location: Egypt
+
+PROFILE
+-------
+Accomplished Senior DevOps Engineer with over 3 years of experience in improving 
+software development through DevOps and Agile methods. Certified AWS Solution 
+Architect with expertise in multi-cloud environments (AWS, Azure, and Apigee).
+
+EXPERIENCE
+----------
+Senior DevOps Engineer | Vodafone Intelligent Solutions (_VOIS) | Aug 2024 - Present
+- Leading platform-wide features for hybrid connectivity
+- Implemented FinOps optimization generating USD 3,143 in monthly cost savings
+- Mentored junior DevOps engineers
+- Recognized as _VOIS Talented Star (2x)
+
+DevOps Engineer | Vodafone Intelligent Solutions (_VOIS) | Feb 2023 - Jul 2024
+- Built TaaS "Telco-as-a-Service" platform
+- Managed AWS-based multi-tenancy platform infrastructure
+- Recognized as _VOIS Talented Star
+
+DevOps Instructor | Digital Egypt Pioneers Initiative (DEPI) | Jun 2024 - Jan 2025
+- Preparing next generation of ICT specialists
+
+DevOps Instructor | Coursera | Oct 2023 - Dec 2023
+- Developed "Building a Scalable App using AWS EKS" course
+
+SKILLS
+------
+Cloud Platforms: AWS (Solution Architect), Azure, Apigee
+Containers: Docker, Kubernetes, Helm, EKS
+CI/CD: Azure Pipelines, Jenkins, CircleCI
+IaC: Terraform, Terragrunt, CloudFormation
+Monitoring: Prometheus, DataDog, HashiCorp Vault
+Security: Trivy, SonarQube, OWASP
+System Admin: Linux, Bash, Python, MySQL, Git
+
+CERTIFICATIONS
+--------------
+- Microsoft Certified: Azure Fundamentals (AZ-900) - Jan 2026
+- HashiCorp Certified: Terraform Associate (003) - Dec 2025
+- AWS Solution Architect Associate (SAA-C03) - Dec 2023
+- Certified Incident Responder (PagerDuty) - Sep 2023
+- DevSecOps Foundation (Vodafone) - Sep 2023
+- Advanced Cloud DevOps Nanodegree (Udacity - Top Graduate) - Feb 2023
+- AWS Cloud Practitioner - Nov 2022
+
+EDUCATION
+---------
+AWS re/start Program | Information Technology Institute (ITI) | Nov 2022
+Bachelor's Electrical Engineering | Alexandria University | Nov 2020
+`;
+            
+            // Create a blob with the CV content
+            const blob = new Blob([cvContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Ahmed_Mourad_CV.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add scroll animation to sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
